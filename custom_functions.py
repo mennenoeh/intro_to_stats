@@ -38,10 +38,13 @@ def get_sales_change_rates_percent(n:int) -> np.ndarray:
     return np.exp(observations) - 1
 
 
-def show_data(x:np.ndarray) -> None:
+def show_data(x:np.ndarray, e:float=None) -> None:
     print(f"n={len(x)}, mean={x.mean()}, std={x.std()}")
     plt.hist(x, bins=50)
     plt.vlines(x.mean()+x.std(), ymin=0, ymax=len(x) / 10, colors="red", linestyles="dotted")
     plt.vlines(x.mean()-x.std(), ymin=0, ymax=len(x) / 10, colors="red", linestyles="dotted")
     plt.vlines(x.mean(), ymin=0, ymax=len(x) / 10, colors="red")
+    if e:
+        plt.vlines(x.mean()+e, ymin=0, ymax=len(x) / 10, colors="green", linestyles="dotted")
+        plt.vlines(x.mean()-e, ymin=0, ymax=len(x) / 10, colors="green", linestyles="dotted")
     # plt.show()
